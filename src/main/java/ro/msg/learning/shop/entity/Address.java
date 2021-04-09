@@ -6,20 +6,16 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Location extends BaseEntity {
+public class Address extends BaseEntity {
 
-    private String name;
-
-    @OneToOne
-    @JoinColumn(name = "address")
-    private Address address;
-
+    private String address_country;
+    private String address_city;
+    private String address_county;
+    private String address_street_address;
 }
