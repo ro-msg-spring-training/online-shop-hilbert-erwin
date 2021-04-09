@@ -1,9 +1,6 @@
 package ro.msg.learning.shop.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,6 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +22,7 @@ public class Product extends BaseEntity {
     private String image_url;
 
     @ManyToOne
-    @JoinColumn(name = "product_category")
+    @JoinColumn(name = "category")
     private ProductCategory product_category;
 
     @ManyToOne
