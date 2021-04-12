@@ -1,22 +1,21 @@
 package ro.msg.learning.shop.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Table(name = "orderz")
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "location")
+    @JoinColumn(name = "shipped_from")
     private Location shippedFrom;
 
     @ManyToOne

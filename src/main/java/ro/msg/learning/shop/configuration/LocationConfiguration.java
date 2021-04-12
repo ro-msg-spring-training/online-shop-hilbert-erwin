@@ -23,7 +23,7 @@ public class LocationConfiguration {
         switch (strategy) {
             case "single":
                 return new SingleLocationStrategy(stockRepository, locationRepository);
-            case "mostAbundant":
+            case "abundant":
                 return new AbundantLocationStrategy(stockRepository);
             default:
                 throw new RuntimeException();

@@ -8,7 +8,7 @@ ALTER TABLE `stock`
     ADD FOREIGN KEY (`location`) REFERENCES `location`(`id`);
 
 ALTER TABLE `order_detail`
-    ADD FOREIGN KEY (`order`) REFERENCES `order`(`id`);
+    ADD FOREIGN KEY (`orderz`) REFERENCES `orderz`(`id`);
 
 ALTER TABLE `order_detail`
     ADD FOREIGN KEY (`product`) REFERENCES `product`(`id`);
@@ -16,8 +16,8 @@ ALTER TABLE `order_detail`
 ALTER TABLE `revenue`
     ADD FOREIGN KEY (`location`) REFERENCES `location`(`id`);
 
-ALTER TABLE `order`
+ALTER TABLE `orderz`
     ADD FOREIGN KEY (`shipped_from`) REFERENCES `location`(`id`);
 
-ALTER TABLE `order`
+ALTER TABLE `orderz`
     ADD FOREIGN KEY (`customer`) REFERENCES `customer`(`id`);
