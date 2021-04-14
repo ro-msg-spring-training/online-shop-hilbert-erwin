@@ -22,6 +22,9 @@ public class AbundantLocationStrategy implements LocationStrategy{
         List<StockDto> stockDtos = new ArrayList<>();
         List<Stock> stocks = null;
         for(OrderDetailDto orderDetailDto : orderCreateDto.getOrderDetailDtos()) {
+            if(orderDetailDto.getProductId() == null || orderDetailDto.getQuantity() == null) {
+                throw new RuntimeException();
+            }
             stocks = stockRepository.findByProductIdAndQuantityGreaterThanEqualOrderByQuantityDesc(orderDetailDto.getProductId(), orderDetailDto.getQuantity());
             if(stocks.size() != 0) {
                 Stock stock = stocks.get(0);
