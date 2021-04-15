@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.msg.learning.shop.dto.OrderCreateDto;
 import ro.msg.learning.shop.dto.OrderDetailDto;
+import ro.msg.learning.shop.dto.OrderDto;
 import ro.msg.learning.shop.dto.StockDto;
 import ro.msg.learning.shop.entity.Address;
 import ro.msg.learning.shop.entity.Order;
@@ -28,9 +29,9 @@ public class OrderService {
     private final OrderDetailRepository orderDetailRepository;
     private final StockRepository stockRepository;
 
-    public List<Order> create(OrderCreateDto orderCreateDto) {
+    public List<OrderDto> create(OrderCreateDto orderCreateDto) {
 
-        List<Order> createdOrders = new ArrayList<>();
+        List<OrderDto> createdOrders = new ArrayList<>();
         List<StockDto> stockDtos = strategy.findStock(orderCreateDto);
 
         Address address = orderCreateDto.getAddress();
@@ -46,7 +47,11 @@ public class OrderService {
                 order = Order.builder().shippedFrom(stockDto.getLocation()).createdAt(orderCreateDto.getCreatedAt())
                         .address(address).build();
                 orderRepository.save(order);
-                createdOrders.add(order);
+                createdOrders.add(OrderDto.builder().shippedFrom(order.getShippedFrom())
+                    .address(order.getAddress())
+                    .createdAt(order.getCreatedAt())
+                    .customer(order.getCustomer()).build()
+                );
             } else {
                 order = orders.get(0);
             }
