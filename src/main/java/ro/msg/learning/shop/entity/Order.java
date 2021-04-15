@@ -1,7 +1,6 @@
 package ro.msg.learning.shop.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
