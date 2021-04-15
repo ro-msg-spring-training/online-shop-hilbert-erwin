@@ -1,7 +1,7 @@
 package ro.msg.learning.shop.entity;
 
-import lombok.*;
 
+import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

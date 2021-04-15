@@ -20,24 +20,12 @@ public class ProductController {
 
     @GetMapping("/products")
     public List<ProductDto> getProducts() {
-        List<Product> products = productService.findAll();
-        List<ProductDto> productDtos = new ArrayList<>();
-
-        for(Product product : products) {
-            productDtos.add(new ProductDto(product, product.getProduct_category(), product.getSupplier()));
-        }
-
-        return productDtos;
+        return productService.findAll();
     }
 
     @GetMapping("/products/{id}")
     public ProductDto getProduct(@PathVariable Long id) {
-        Product product = productService.findById(id);
-        if(product == null) {
-            return null;
-        } else {
-            return new ProductDto(product, product.getProduct_category(),product.getSupplier());
-        }
+        return productService.findById(id);
     }
 
     @PostMapping(value = "/products", consumes = MediaType.APPLICATION_JSON_VALUE)
