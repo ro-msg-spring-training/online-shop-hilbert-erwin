@@ -18,12 +18,16 @@ public class LocationConfiguration {
     private final StockRepository stockRepository;
     private final LocationRepository locationRepository;
 
+    private enum Strategy {
+        SINGLE, ABUNDANT
+    }
+
     @Bean
-    public LocationStrategy chooseStrategy(@Value("${strategy}") String strategy) {
+    public LocationStrategy chooseStrategy(@Value("${strategy}") Strategy strategy) {
         switch (strategy) {
-            case "single":
+            case SINGLE:
                 return new SingleLocationStrategy(stockRepository, locationRepository);
-            case "abundant":
+            case ABUNDANT:
                 return new AbundantLocationStrategy(stockRepository);
             default:
                 throw new RuntimeException();

@@ -10,6 +10,7 @@ import ro.msg.learning.shop.repository.ProductCategoryRepository;
 import ro.msg.learning.shop.repository.ProductRepository;
 import ro.msg.learning.shop.repository.SupplierRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,19 +21,29 @@ public class ProductService {
     private final ProductCategoryRepository productCategoryRepository;
     private final SupplierRepository supplierRepository;
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<ProductDto> findAll() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDto> productDtos = new ArrayList<>();
+        for(Product product : products) {
+            productDtos.add(new ProductDto(product, product.getProduct_category(), product.getSupplier()));
+        }
+        return productDtos;
     }
 
-    public Product findById(Long id) {
-        return productRepository.findById(id).orElse(null);
+    public ProductDto findById(Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        if(product == null){
+            return null;
+        } else {
+            return new ProductDto(product, product.getProduct_category(), product.getSupplier());
+        }
     }
 
     public void delete(Long id) {
         productRepository.deleteById(id);
     }
 
-    public Product create(ProductDto productDto) {
+    public ProductDto create(ProductDto productDto) {
         ProductCategory productCategory = productCategoryRepository.findByName(productDto.getProductCategoryName());
         Supplier supplier = supplierRepository.findByName(productDto.getSupplierName());
 
@@ -56,10 +67,10 @@ public class ProductService {
                 .supplier(supplier).build();
         productRepository.save(product);
 
-        return product;
+        return new ProductDto(product, product.getProduct_category(), product.getSupplier());
     }
 
-    public Product update(Long id, ProductDto productDto) {
+    public ProductDto update(Long id, ProductDto productDto) {
         Product product = productRepository.findById(id).orElse(null);
         if(product == null) {
             return create(productDto);
@@ -95,7 +106,7 @@ public class ProductService {
             productCategoryRepository.save(productCategory);
             supplierRepository.save(supplier);
 
-            return product;
+            return new ProductDto(product, product.getProduct_category(), product.getSupplier());
         }
     }
 
