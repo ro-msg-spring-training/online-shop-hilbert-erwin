@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `product_category` (
     `description` varchar(128)
 );
 
-CREATE TABLE IF NOT EXISTS `order` (
+CREATE TABLE IF NOT EXISTS `orderz` (
     `id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `shipped_from` int,
     `customer` int,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `stock` (
 
 CREATE TABLE IF NOT EXISTS `order_detail` (
     `id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `order` int,
+    `orderz` int,
     `product` int,
     `quantity` int
 );

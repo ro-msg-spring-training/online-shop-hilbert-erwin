@@ -9,17 +9,17 @@ CREATE TABLE IF NOT EXISTS `address` (
 ALTER TABLE `location`
     DROP COLUMN `address_country`, `address_city`, `address_county`, `address_street_address`;
 
-ALTER TABLE `order`
+ALTER TABLE `orderz`
     DROP COLUMN `address_country`, `address_city`, `address_county`, `address_street_address`;
 
 ALTER TABLE `location`
     ADD COLUMN `address` int;
 
-ALTER TABLE `order`
+ALTER TABLE `orderz`
     ADD COLUMN `address` int;
 
 ALTER TABLE `location`
     ADD FOREIGN KEY (`address`) REFERENCES `address`(`id`);
 
-ALTER TABLE `order`
+ALTER TABLE `orderz`
     ADD FOREIGN KEY (`address`) REFERENCES `address`(`id`);
