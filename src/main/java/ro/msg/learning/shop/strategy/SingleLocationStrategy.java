@@ -30,6 +30,9 @@ public class SingleLocationStrategy implements  LocationStrategy{
             Boolean productNotFound = false;
             for(OrderDetailDto orderDetailDto : orderCreateDto.getOrderDetailDtos()) {
                 stockDtos = new ArrayList<>();
+                if(orderDetailDto.getProductId() == null || orderDetailDto.getQuantity() == null) {
+                    throw new RuntimeException();
+                }
                 stocks = stockRepository.findByProductIdAndQuantityGreaterThanEqualAndLocationId(orderDetailDto.getProductId(),
                         orderDetailDto.getQuantity(), location.getId());
                 if(stocks.size() == 0) {

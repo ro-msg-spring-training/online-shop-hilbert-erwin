@@ -1,9 +1,6 @@
 package ro.msg.learning.shop.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,6 +8,7 @@ import javax.persistence.OneToOne;
 
 @Data
 @Entity
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
